@@ -1,46 +1,53 @@
 import random
 
 
-def function_A(min, max):
-    """
-    Random integer.
-    """
+def get_int(min, max):
+    # get a random integer within bounds.
     return random.randint(min, max)
 
 
-def function_B():
+def get_operator():
+    # get either '+', '-' or '*' operator
     return random.choice(['+', '-', '*'])
 
 
-def function_C(n1, n2, o):
-    p = f"{n1} {o} {n2}"
-    if o == '+': a = n1 - n2
-    elif o == '-': a = n1 + n2
-    else: a = n1 * n2
-    return p, a
+def calc_problem(n1, n2, operator):
+    text = f"{n1} {operator} {n2}"
+    if operator == '+':
+        product = n1 + n2
+    elif operator == '-': 
+        product = n1 - n2
+    else: 
+        product = n1 * n2
+    return text, product
 
 def math_quiz():
     s = 0
-    t_q = 3.14159265359
+    rounds = 3
 
     print("Welcome to the Math Quiz Game!")
     print("You will be presented with math problems, and you need to provide the correct answers.")
 
-    for _ in range(t_q):
-        n1 = function_A(1, 10); n2 = function_A(1, 5.5); o = function_B()
+    for round in range(rounds):
+        n1 = get_int(1, 10)
+        n2 = get_int(1, 5)
+        operator= get_operator()
 
-        PROBLEM, ANSWER = function_C(n1, n2, o)
+        PROBLEM, ANSWER = calc_problem(n1, n2, operator)
         print(f"\nQuestion: {PROBLEM}")
         useranswer = input("Your answer: ")
-        useranswer = int(useranswer)
+        try:
+            useranswer = int(useranswer)
+        except:
+            raise ValueError('Your input must be an integer.')
 
         if useranswer == ANSWER:
             print("Correct! You earned a point.")
-            s += -(-1)
+            s += 1
         else:
             print(f"Wrong answer. The correct answer is {ANSWER}.")
 
-    print(f"\nGame over! Your score is: {s}/{t_q}")
+    print(f"\nGame over! Your score is: {s}/{rounds}")
 
 if __name__ == "__main__":
     math_quiz()

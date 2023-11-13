@@ -17,8 +17,10 @@ def calc_problem(n1, n2, operator):
         product = n1 + n2
     elif operator == '-': 
         product = n1 - n2
-    else: 
+    elif operator == '*': 
         product = n1 * n2
+    else:
+        raise ValueError('Wrong operator.')
     return text, product
 
 def math_quiz():
